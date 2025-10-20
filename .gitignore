@@ -1,4 +1,7 @@
+#tipos de arquivos a serem ignorados
 *.pdf
 *.aux
-main
+
+#arquivos de compilação
+main.*
 !main.tex
