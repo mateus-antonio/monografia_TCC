@@ -1,4 +1,4 @@
-#tipos de arquivos a serem ignorados
+#tipos de arquivos
 *.pdf
 *.aux
 
