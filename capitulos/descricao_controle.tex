@@ -2,9 +2,16 @@
 
 O presente trabalho busca controlar a posição de um carro ao longo de uma guia linear. Para realizar essa tarefa, foi escolhida a realimentação de estados como estratégia de controle.
 
-\section{Projeto Realimentação de Estados}
+\section{Realimentação de Estados}
 
-Na realimentação de estados, são determinados requisitos para o sistema, de tal forma que esses correspondem a novos polos do sistema no plano complexo; para tal, uma lei de controle para a mudança dos polos é estabelecida, em que $U(t) = KX(t)$ é o vetor de controle, onde $K \in \mathbb{R}^{n_u \times n}$. A Figura \ref{fig:diagrama_blocos} apresenta o diagrama de blocos com a presença do controlador via realimentação de estados.
+Na realimentação de estados, são determinados requisitos para o sistema, de tal forma que esses correspondem a novos polos do sistema no plano complexo; para tal, uma lei de controle para a mudança dos polos é estabelecida, em que  
+
+\begin{equation}
+    U(k) = -KX(k)
+    \label{vetor_controle_realimentacao}
+\end{equation}
+
+\noindent é o vetor de controle, onde $K \in \mathbb{R}^{n_u \times n}$. A Figura \ref{fig:diagrama_blocos} apresenta o diagrama de blocos com a presença do controlador via realimentação de estados.
 
 \begin{figure}[H]
     \centering
@@ -117,7 +124,7 @@ Já o máximo sobressinal ($M_s$)
     \label{maximo_sobressinal}
 \end{equation}
 
-Foram estipulados como requisitos para o sistema um máximo sobressinal de 83\% ($M_s=0.83$) e 0,32 segundos como tempo de pico ($t_p=0,32$). Com esses valores, as Equações \ref{maximo_sobressinal} e \ref{tempo_pico} formam um sistema de equações com 2 variáveis, isolando $\zeta$ e $w_n$ obtem-se
+Foram estipulados como requisitos para o sistema um máximo sobressinal de 83\% ($M_s=0.83$) e 0,32 segundos como tempo de pico ($t_p=0,32$). Com esses valores, as Equações \ref{maximo_sobressinal} e \ref{tempo_pico} formam um sistema de equações com 2 variáveis, isolando $\zeta$ e $w_n$ obtêm-se
 
 \begin{equation}
     \zeta = \sqrt{\frac{\ln(M_s)^2}{\pi^2+\ln(M_s)^2}} =  0,0592
@@ -128,3 +135,104 @@ Foram estipulados como requisitos para o sistema um máximo sobressinal de 83\% 
     w_n = \frac{\pi}{t_p \sqrt{1-\zeta^2}} = 9,8347
     \label{wn}
 \end{equation}
+
+Agora com os valores de $w_n$ e $\zeta$, pode-se retornar a Equação \ref{resposta_ordem2} e obter os polos de malha fechada para o desempenho desejado
+
+\begin{equation}
+    s_{polos} = -\zeta w_n \pm w_n \sqrt{1-\zeta^2}
+    \label{polos_malha_fechada}
+\end{equation}
+
+\noindent obtendo como polos a tempo contínuo
+
+\begin{equation}
+    s_{polos} = -0,5823 \pm 9,8175 j
+    \label{polos_continuo}
+\end{equation}
+
+Esses polos são convertidos para o tempo discreto por meio da seguinte equação
+
+\begin{equation}
+    z_{polos} = e^{(s T_s)} = 0,9894 \pm 0,0974 j
+    \label{polos_discreto}
+\end{equation}
+
+obtendo por fim, a equação característica desejada
+
+\begin{equation}
+    z^2-1,9788z+0,0095 = 0
+    \label{equacao_desejada}
+\end{equation}
+
+\section{Projeto Realimentação de Estados}
+
+Agora com os polos obtidos para o desempenho desejado, torna-se possível realizar o projeto da realimentacão de estados. Usando a Equação \ref{vetor_controle_realimentacao} em \ref{modelo_espaco_estados_discreto} 
+
+\begin{equation}
+     X(k+1) = \Phi X(k) - \varGamma KX(k) = (\Phi-\varGamma K)X(k)
+     \label{modelo_espaco_estados_discreto2}
+\end{equation}
+
+\noindent em que os polos de malha fechada são dados por
+
+\begin{equation}
+    | z I_2 - (\Phi-\varGamma K) | = 0
+    \label{polos_MF}
+\end{equation}
+
+Igualando as Equações \ref{polos_MF} e \ref{equacao_desejada} pode-se obter os valores do controlador para realimentacão de estados.
+
+\begin{equation}
+    | z I_2 - (\Phi-\varGamma K) | = z^2-1,9788z+0,0095
+    \label{realimentacao_estados}
+\end{equation}
+
+Para a realização do cálculo, foi utilizado a função \textit{place} do software MATLAB, obtendo o seguinte controlador:
+
+\begin{equation}
+    K = 
+    \begin{bmatrix}
+        110,3976 && -4,7399
+    \end{bmatrix}
+    \label{controlador_realimentacao}
+\end{equation}
+
+Já para os ganhos $N_x$ e $N_u$, esses podem ser obtidos por meio da seguinte equação:
+
+\begin{equation}
+    \begin{bmatrix}
+        N_x \\ N_u
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+        \phi-I_2 && \varGamma \\ C && 0
+    \end{bmatrix}
+    ^{-1}\times 
+    \begin{bmatrix}
+        0 && 0 && 1
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+        1 \\ 0 \\ 0
+    \end{bmatrix}
+    \label{ganhos_Nxu}
+\end{equation}
+
+\noindent assim, 
+
+\begin{equation}
+    N_x = 
+    \begin{bmatrix} 
+        1 \\ 0 
+    \end{bmatrix}
+    \label{Nx}
+\end{equation}
+
+\begin{equation}
+    N_u = 
+    \begin{bmatrix} 
+        0 
+    \end{bmatrix}
+    \label{Nu}
+\end{equation}
+
