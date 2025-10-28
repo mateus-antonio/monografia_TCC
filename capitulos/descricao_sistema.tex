@@ -1,8 +1,8 @@
 \chapter{Descrição do sistema}
 
-O objetivo do presente trabalho é desenvolver um sistema capaz de posicionar um carro ao longo de uma guia linear. Esse sistema será doravante denominado posicionador linear. Sistemas similares são encontrados em diferentes aplicações reais, por exemplo, em impressoras a jato, o bico de deposição de tinta deve ser posicionado ao longo da trilha de impressão. A seguir, detalham-se as características, bem como os ensaios para a realização da modelagem do processo.
+O objetivo do presente trabalho é desenvolver um sistema capaz de posicionar um carro ao longo de uma guia linear. Esse sistema será doravante denominado posicionador linear. Sistemas similares são encontrados em diferentes aplicações reais, por exemplo, em impressoras a jato, o bico de deposição de tinta deve ser posicionado ao longo da trilha de impressão. A seguir, detalham-se as características do sistema construído, bem como os ensaios para a realização da modelagem do processo.
 
-O posicionador linear é constituído por um carro que desliza sobre trilhos, permitindo apenas o movimento em um grau de liberdade. O veículo é conectado a um motor CC (Corrente Contínua) por meio de uma correia. Dessa forma, converte-se a rotação do motor em movimento linear do carro. O protótipo completo é apresentado nas Figuras \ref{fig:vista_superior} e \ref{fig:vista_frontal}.
+O posicionador linear é constituído por um carro que desliza sobre trilhos, permitindo apenas movimento em um grau de liberdade. O veículo é conectado a um motor CC (Corrente Contínua) por meio de uma correia. Dessa forma, converte-se a rotação do motor em movimento linear do carro. O protótipo completo é apresentado nas Figuras \ref{fig:vista_superior} e \ref{fig:vista_frontal}.
 
 \begin{figure}[H]
     \centering
@@ -152,7 +152,7 @@ Isolando $\ddot{x}_c$, obtém-se
 A Equação \eqref{isolado} é o modelo dinâmico entre a tensão média aplicada ao motor e a aceleração do carro. Tal modelo será adotado no projeto do controlador.
 
 \subsection{Espaço de Estados}
-Pode-se representar o sistema no espaço de estados. De forma genérica, um modelo no espaço de estados é descrito por
+Pode-se representar o sistema no espaço de estados. De forma genérica, um modelo no espaço de estados é descrito por \cite{ogata2010engenharia}
 
 \begin{equation}
     P :\begin{cases} 
@@ -170,7 +170,7 @@ Pode-se representar o sistema no espaço de estados. De forma genérica, um mode
         X_1(t) \\ X_2(t) 
     \end{bmatrix}=
     \begin{bmatrix}
-        x_c(t) \\ \dot{x_c}(t)
+        x_c(t) \\ \dot{x}_c(t)
     \end{bmatrix}
     \label{vetor_estados}
 \end{gather}
@@ -215,7 +215,8 @@ Assim, pode-se escrever o do posicionador linear no espaço de estados da seguin
 
 \subsection{Identificação dos parâmetros físicos}
 \label{identificacao}
-Para identificar os parâmetros do sistema, sendo estes a massa do veículo $M$, o coeficiente de atrito viscoso $B_c$ e o ganho de atuação $K_a$. Para isso, foi definido $\dot{x}_c=v_c$. Dessa forma, reescreveu-se o modelo \eqref{isolado} em função da velocidade, obtendo a Equação \eqref{velocidade}. Um procedimento similar pode ser encontrado em \citeonline{netto2016relatorio}.
+
+Foram realizados ensaios experimentais para identificar os parâmetros do sistema, sendo estes a massa do veículo $M$, o coeficiente de atrito viscoso $B_c$ e o ganho de atuação $K_a$. Para isso, foi definido $\dot{x}_c=v_c$. Dessa forma, reescreveu-se o modelo \eqref{isolado} em função da velocidade, obtendo a Equação \eqref{velocidade}. Um procedimento similar pode ser encontrado em \citeonline{netto2016relatorio}.
 
 \begin{equation}
     \tau\dot{v}_c(t)+v_c(t)=k_0V_m(t)
@@ -239,11 +240,9 @@ Ao aplicar um degrau de tensão de amplitude $v_0$, a evolução da velocidade d
 Os coeficientes desconhecidos $\tau$ e $k_0$ podem ser facilmente identificados com base na resposta experimental ao degrau. Mais precisamente, ao aplicar um degrau de tensão de amplitude conhecida $v_0$, a velocidade em regime permanente tenderá para $k_0v_0$.
 O instante de tempo em que $v_c$ atingir 63\% do seu valor de regime permanente é a constante de tempo $\tau$.
 
-Seguindo essa metodologia, foram realizados ensaios com amplitudes de degrau de tensão diferentes. No instante $t = 0$~s, com o carro em repouso, aplicaram-se tais entradas e mediu-se a evolução temporal da velocidade. Vale comentar que em função do tempo durante 2 segundos, durante a realização, foi observado que, para amplitudes menores que 3 V, o motor não consegue exercer força suficiente para movimentar o sistema, em virtude do do atrito seco no conjunto e da zona morta do motor CC. Tal efeito prático será incluído nas simulações do processo. 
+Seguindo essa metodologia, foram realizados ensaios com amplitudes de degrau de tensão diferentes. No instante $t = 0$~s, com o carro em repouso, aplicaram-se tais entradas e mediu-se a evolução temporal da velocidade. Foi observado que, para amplitudes menores que 3 V, o motor não consegue exercer força suficiente para movimentar o sistema, em virtude do do atrito seco no conjunto e da zona morta do motor CC. Tal efeito prático será incluído nas simulações do processo. 
 
 As Figuras \ref{fig:resp_degrau3}--\ref{fig:resp_degrau12} apresentam a resposta da velocidade para os degraus de amplitudes 3, 6, 9 e 12 V. Vale comentar que a velocidade medida foi filtrada utilizando um filtro Butterworth digital de segunda ordem. Os detalhes de projeto desse filtro encontram-se no Apêndice \ref{apend:1}.
-
-Após a realização dos ensaios, foi projetado um filtro de butterworth de segunda ordem para filtragem do sinal de leitura do \textit{encoder} (Apêndice \ref{apend:1}). As figuras a seguir apresentam o resultados obtidos por meio destes ensaios com o uso do filtro:
 
 \begin{figure}[H]
     \centering
@@ -345,8 +344,6 @@ Considerando que $F_a = T/r$, é possível reescrever \eqref{torque_motor} do se
 
 Nota-se que existe uma relação linear entre a tensão média $V_m$ e a divisão do momento da força peso pelo raio da roldana. Assim, ao realizar uma regressão linear com esses dados, o coeficiente angular obtido será igual ao ganho de atuação. Após realizada, foi obtido um valor de 9,1898 N/V
 para $K_a$, a Figura \ref{fig:regressao} apresenta a comparação entre os resultados experimentais e a regressão linear.
-
-De posse dos dados da Tabela \ref{tab:ensaio_motor} e da relação \eqref{forca_motor}, é possível gerar o gráfico da Figura \ref{fig:regressao}. Realizando a regressão linear (também ilustrada na Figura) é possível estimar $K_a = 9,2$~N/V.
 
 \begin{figure}[H]
     \centering
