@@ -102,7 +102,7 @@ O Arduino Mega será utilizado para medir a posição do carro (utilizando o \te
 
 O microcontrolador irá processar os dados e, com base na diferença entre as posições atual e desejada para o carro, calcular a ação de controle, no caso, a tensão média aplicada ao motor. Nota-se, portanto, que o sistema irá operar em malha fechada \cite{ogata2010engenharia}. Para projetar a lei de controle, realizou-se a modelagem matemática do sistema, como será descrito a seguir.
 
-\section{Modelagem Matemática}
+\section{Modelagem Matemática \label{modelagem}}
 Para a realização da modelagem da dinâmica do posicionador linear, foi considerado o carro como um corpo rígido, ou seja, a distância entre quaisquer duas partes do corpo será sempre constante. A Figura \ref{fig:corpo_rigido} ilustra as forças atuantes sobre o corpo. Na imagem, a força exercida pelo motor é representada como $F_c$ e $F_a$ representa a força de atrito, $M$ é a massa do veículo.
 
  \begin{figure}[H]
