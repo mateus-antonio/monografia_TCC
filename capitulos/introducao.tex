@@ -1,1 +1,17 @@
 \chapter[Introdução]{Introdução}
+Existe uma demanda constante nas indústrias por melhoras na eficiência e na produção, seja via otimização de processos ou na automação dos mesmos, tendo cada vez mais a busca pelo controle automático de sistemas. Nesse cenário, sistemas de controle automático se tornam o alicerce para uma nova revolução de automação industrial \cite{bencomo2002control}. Em virtude disso, o domínio de técnicas de controle se torna uma necessidade na formação do engenheiro mecatrônico, visto a busca do mercado por profissionais engenheiros capacitados nas mais diversas técnicas de controle.
+
+Sistemas de controle possuem duas linhas principais de pensamento \cite{kheir1996control}: uma é baseada na experiência prática enquanto a outra é baseada na teoria e matemática. Sendo assim, o engenheiro mecatrônico necessita compreender na prática os efeitos das soluções teóricas na resolução de problemas reais e a validação dos conceitos de modelagem, identificação de parâmetros e projeto de controladores. Assim, utilizar-se de protótipos didáticos em ambientes educacionais na área de controle é algo recomendável para uma formação consistente dos alunos \cite{silva2001midias}. Não se pode esquecer que a existência de protótipos didáticos pode ainda auxiliar como base para futuras pesquisas envolvendo controle digital, realimentação de estados ou identificação de parâmetros, seja pelos estudantes de graduação ou pelos de pós-graduação.
+
+Neste contexto, este trabalho consiste no projeto e construção de uma bancada experimental de posicionamento linear acionada por motor CC, bem como o seu controle via realimentação de estados. O posicionador linear foi escolhido em virtude de possuir diversos parâmetros comuns e problemas tradicionais de controle \cite{netto2016relatorio}, sendo um modelo adequado para fins didáticos visto que não possui um nível elevado de complexidade. 
+
+Assim, este trabalho tem como objetivo desenvolver e implementar um sistema de controle de posição para um posicionador linear, empregando um controlador por realimentação de estados embarcado em um microcontrolador. Busca-se construir uma bancada experimental didática, bem como modelar matematicamente seu sistema ao considerar os principais parâmetros físicos, criando a necessidade de identificar experimentalmente os parâmetros físicos do modelo. Será ainda feito o projeto de um controlador por realimentação de estados que atenda aos requisitos de desempenho definidos e sua implementação em hardware. Serão obtidos resultados experimentais com a bancada elaborada e resultados de simulação por meio do modelo matemático obtido, os resultados serão analisados e comparados, sendo discutindo as discrepâncias observadas entre os mesmos.
+
+O restante do presente trabalho está estruturado do seguinte modo:
+
+\begin{itemize}
+    \item O Capítulo 2 descreve os componentes do posicionador linear em conjunto com sua arquitetura de funcionamento e modelagem matemática.
+    \item O Capítulo 3 aborda os conceitos teóricos da realimentação de estados e desenvolve o controlador para o posicionador linear.
+    \item No Capítulo 4 são apresentados os resultados obtidos e é realizada a análise desses. No capítulo são analisados os resultados de simulação e experimentais, sendo feita uma comparação entre os mesmos.
+    \item O Capítulo 5 traz a conclusão do trabalho junto com sugestões de trabalhos futuros.
+\end{itemize}
