@@ -1,11 +1,46 @@
 \chapter[Introdução]{Introdução}
-Existe uma demanda constante nas indústrias por melhoras na eficiência e na produção, seja via otimização de processos ou na automação dos mesmos, tendo cada vez mais a busca pelo controle automático de sistemas. Nesse cenário, sistemas de controle automático se tornam o alicerce para uma nova revolução de automação industrial \cite{bencomo2002control}. Em virtude disso, o domínio de técnicas de controle se torna uma necessidade na formação do engenheiro mecatrônico, visto a busca do mercado por profissionais engenheiros capacitados nas mais diversas técnicas de controle.
+Existe uma demanda constante na indústria por melhoras na eficiência de produção, seja via otimização de processos ou na automação dos mesmos, tendo cada vez mais a busca pelo controle automático de sistemas. Nesse cenário, sistemas de controle automático são parte do alicerce para uma nova revolução de automação industrial \cite{bencomo2002control}. Em virtude disso, o domínio de técnicas de controle se torna uma necessidade na formação do engenheiro mecatrônico, visto a busca do mercado por profissionais engenheiros capacitados nas mais diversas técnicas de controle.
 
-Sistemas de controle possuem duas linhas principais de pensamento \cite{kheir1996control}: uma é baseada na experiência prática enquanto a outra é baseada na teoria e matemática. Sendo assim, o engenheiro mecatrônico necessita compreender na prática os efeitos das soluções teóricas na resolução de problemas reais e a validação dos conceitos de modelagem, identificação de parâmetros e projeto de controladores. Assim, utilizar-se de protótipos didáticos em ambientes educacionais na área de controle é algo recomendável para uma formação consistente dos alunos \cite{silva2001midias}. Não se pode esquecer que a existência de protótipos didáticos pode ainda auxiliar como base para futuras pesquisas envolvendo controle digital, realimentação de estados ou identificação de parâmetros, seja pelos estudantes de graduação ou pelos de pós-graduação.
+O projeto de sistemas de controle possuem duas abordagens principais \cite{kheir1996control}: uma é baseada na experiência prática com o processo propriamente dito enquanto a outra é baseada na teoria e matemática partindo de um modelo teórico ou identificado do processo que se está controlando. Para dominar essas formas de projeto, o engenheiro mecatrônico necessita compreender os efeitos das soluções práticas e teóricas na resolução de problemas reais. Também é fundamental a validação experimental de conceitos fundamentais da teoria de controle, tais como modelagem, identificação de parâmetros e projeto de controladores. Assim, utilizar-se de protótipos didáticos em ambientes educacionais na área de controle é algo recomendável para uma formação consistente de engenheiros \cite{silva2001midias}. Não se pode esquecer que a existência de protótipos didáticos pode ainda auxiliar como base para futuras pesquisas envolvendo técnicas de controle mais avançadas como o Controle Preditivo Basedo em Modelo.
 
-Neste contexto, este trabalho consiste no projeto e construção de uma bancada experimental de posicionamento linear acionada por motor CC, bem como o seu controle via realimentação de estados. O posicionador linear foi escolhido em virtude de possuir diversos parâmetros comuns e problemas tradicionais de controle \cite{netto2016relatorio}, sendo um modelo adequado para fins didáticos visto que não possui um nível elevado de complexidade. 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth/2]{figuras/pendulo.png}
+    \caption[Pêndulo invertido rotacional]{Pêndulo invertido rotacional \cite{quanser}.}
+    \label{pendulo}
+\end{figure}
 
-Assim, este trabalho tem como objetivo desenvolver e implementar um sistema de controle de posição para um posicionador linear, empregando um controlador por realimentação de estados embarcado em um microcontrolador. Busca-se construir uma bancada experimental didática, bem como modelar matematicamente seu sistema ao considerar os principais parâmetros físicos, criando a necessidade de identificar experimentalmente os parâmetros físicos do modelo. Será ainda feito o projeto de um controlador por realimentação de estados que atenda aos requisitos de desempenho definidos e sua implementação em hardware. Serão obtidos resultados experimentais com a bancada elaborada e resultados de simulação por meio do modelo matemático obtido, os resultados serão analisados e comparados, sendo discutindo as discrepâncias observadas entre os mesmos.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth/2]{figuras/levitacao_magnetica.png}
+    \caption[Levitador magnético]{Levitador magnético \cite{feedback_instruments}.}
+    \label{levita_magnetica}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth/2]{figuras/aeropendulo_cleiton.png}
+    \caption[Aeropêndulo]{Aeropêndulo \cite{morais2023implementaccao}.}
+    \label{aeropendulo_cleiton}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth/2]{figuras/fan_plate.png}
+    \caption[\textit{Fan plate}]{\textit{Fan plate} \cite{ishigaki2004inclusao}.}
+    \label{fan_plate}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth/2]{figuras/controle_tanques.png}
+    \caption[Controle de tanques acoplados]{Controle de tanques acoplados \cite{pimentel2024desenvolvimento}.}
+    \label{fan_plate}
+\end{figure}
+
+Neste contexto, este trabalho consiste no projeto e construção de uma bancada experimental de um posicionador linear. Basicamente, o sistema é composto por um carro que deve ser posicionado ao longo de um guia linear. A tarefa de controle consiste em fazer com o que o carro vá para a posição de referência. Para isso, controla-se a tensão aplicada a um motor CC e mede-se a posição do carro em relação à posição inicial. A ideia é que esse equipamento possa ser utilizado nas aulas práticas das disciplinas de Controle na Universidade Federal de Uberlândia. O posicionador linear foi escolhido em virtude de possuir diversos parâmetros comuns e problemas tradicionais de controle \cite{netto2016relatorio}, sendo um modelo adequado para fins didáticos visto que não possui um nível elevado de complexidade. Além disso, a partir do modelo matemático identificado por meio da resposta ao degrau, desenvolve-se um sistema de controle por realimentação de estados \cite{ogata2010engenharia}, evidenciando a aplicabilidade de técnicas clássicas de controle ao sistema em estudo. 
+
+Assim, este trabalho tem como objetivo desenvolver e implementar um sistema de controle de posição para um posicionador linear, empregando um controlador por realimentação de estados embarcado em um microcontrolador. Busca-se construir uma bancada experimental didática, bem como modelar matematicamente seu sistema ao considerar os principais parâmetros físicos, criando a necessidade de identificar experimentalmente os parâmetros físicos do modelo. Serão obtidos resultados experimentais com a bancada elaborada e resultados de simulação por meio do modelo matemático obtido, os resultados serão analisados e comparados, sendo discutindo as discrepâncias observadas entre os mesmos.
 
 O restante do presente trabalho está estruturado do seguinte modo:
 
@@ -13,5 +48,5 @@ O restante do presente trabalho está estruturado do seguinte modo:
     \item O Capítulo 2 descreve os componentes do posicionador linear em conjunto com sua arquitetura de funcionamento e modelagem matemática.
     \item O Capítulo 3 aborda os conceitos teóricos da realimentação de estados e desenvolve o controlador para o posicionador linear.
     \item No Capítulo 4 são apresentados os resultados obtidos e é realizada a análise desses. No capítulo são analisados os resultados de simulação e experimentais, sendo feita uma comparação entre os mesmos.
-    \item O Capítulo 5 traz a conclusão do trabalho junto com sugestões de trabalhos futuros.
+    \item O Capítulo 5 traz as conclusões do trabalho junto com sugestões de trabalhos futuros.
 \end{itemize}

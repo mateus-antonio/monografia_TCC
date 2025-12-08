@@ -190,9 +190,9 @@ parte dos requisitos exigidos para a obtenção título de Bacharel em Engenhari
 		%pdfkeywords={palavra 1}{palavra 2}{palavra 4}{palavra 4}{palavra 5}, 
 		colorlinks=true,       		% false: boxed links; true: colored links
     	linkcolor=blue,          	% color of internal links
-    	citecolor=blue,        		% color of links to bibliography
+    	citecolor=black,        		% color of links to bibliography
     	filecolor=magenta,      	% color of file links
-		urlcolor=blue,
+		urlcolor=black,
 		bookmarksdepth=4
 }
 \makeatother
@@ -213,3 +213,10 @@ parte dos requisitos exigidos para a obtenção título de Bacharel em Engenhari
 % ---
 \makeindex
 % ---
+
+
+%justificar o texto
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000

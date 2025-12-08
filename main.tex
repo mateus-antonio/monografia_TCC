@@ -9,11 +9,6 @@ brazil]{facom-ufu-abntex2}
 \usepackage{graphicx}
 \graphicspath{{figuras/}{pictures/}{images/}{./}} % where to search for the images
 
-\tolerance=1
-\emergencystretch=\maxdimen
-\hyphenpenalty=10000
-\hbadness=10000
-
 \newcommand{\blue}[1]{\textcolor{blue}{#1}}
 \newcommand{\red}[1]{\textcolor{red}{#1}}
 
@@ -54,7 +49,7 @@ brazil]{facom-ufu-abntex2}
     {\ABNTEXchapterfont\large\imprimirautor}
 
     \vspace*{\fill}\vspace*{\fill}
-    {\ABNTEXchapterfont\bfseries\Large\imprimirtitulo}
+    {\ABNTEXchapterfont\bfseries\large\ CONSTRUÇÃO E CONTROLE DE UM POSICIONADOR LINEAR UTILIZANDO REALIMENTAÇÃO DE ESTADOS}
     \vspace*{\fill}
     
     \hspace{.45\textwidth}
@@ -118,21 +113,14 @@ brazil]{facom-ufu-abntex2}
 %\end{epigrafe}
 % ---
 
+\input{elementos/resumo.tex}
 
-
-\begin{resumo} %TCC:
- 
-
- \vspace{\onelineskip}
-    
- \noindent
- \textbf{Palavras-chave}:  %TCC:
-\end{resumo}
 
 % ---
 % inserir lista de ilustrações
 % ---
 \pdfbookmark[0]{\listfigurename}{lof}
+\hypersetup{linkcolor = black}
 \listoffigures*
 \cleardoublepage
 % ---
