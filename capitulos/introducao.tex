@@ -3,40 +3,46 @@ Existe uma demanda constante na indústria por melhoras na eficiência de produ�
 
 O projeto de sistemas de controle possuem duas abordagens principais \cite{kheir1996control}: uma é baseada na experiência prática com o processo propriamente dito enquanto a outra é baseada na teoria e matemática partindo de um modelo teórico ou identificado do processo que se está controlando. Para dominar essas formas de projeto, o engenheiro mecatrônico necessita compreender os efeitos das soluções práticas e teóricas na resolução de problemas reais. Também é fundamental a validação experimental de conceitos fundamentais da teoria de controle, tais como modelagem, identificação de parâmetros e projeto de controladores. Assim, utilizar-se de protótipos didáticos em ambientes educacionais na área de controle é algo recomendável para uma formação consistente de engenheiros \cite{silva2001midias}. Não se pode esquecer que a existência de protótipos didáticos pode ainda auxiliar como base para futuras pesquisas envolvendo técnicas de controle mais avançadas como o Controle Preditivo Basedo em Modelo.
 
-\begin{figure}[H]
+Para um melhor entendimento para o projeto de uma bancada didática, foram buscadas referências em equipamentos comerciais e outros trabalhos, os quais são apresentados a seguir:  
+
+\begin{itemize}
+    \item No pêndulo invertido rotacional da Quanser Consulting \cite{quanser}, busca-se manter o pêndulo na posição vertical por meio do movimento da base rotacional, medindo por meio de \textit{encoder} o ângulo da base e o do pêndulo;
+    
+    \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth/2]{figuras/pendulo.png}
+    \includegraphics[width=\textwidth/3]{figuras/pendulo.png}
     \caption[Pêndulo invertido rotacional]{Pêndulo invertido rotacional \cite{quanser}.}
     \label{pendulo}
-\end{figure}
+    \end{figure}
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth/2]{figuras/levitacao_magnetica.png}
-    \caption[Levitador magnético]{Levitador magnético \cite{feedback_instruments}.}
-    \label{levita_magnetica}
-\end{figure}
+    \item No levitador magnético da Feedback Instruments \cite{feedback_instruments}, é visado estabilizar a posição da esfera de aço por meio do controle da força eletromagnética gerada pelo eletroimã;
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth/2]{figuras/aeropendulo_cleiton.png}
-    \caption[Aeropêndulo]{Aeropêndulo \cite{morais2023implementaccao}.}
-    \label{aeropendulo_cleiton}
-\end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth/3]{figuras/levitacao_magnetica.png}
+        \caption[Levitador magnético]{Levitador magnético \cite{feedback_instruments}.}
+        \label{levita_magnetica}
+    \end{figure}
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth/2]{figuras/fan_plate.png}
-    \caption[\textit{Fan plate}]{\textit{Fan plate} \cite{ishigaki2004inclusao}.}
-    \label{fan_plate}
-\end{figure}
+    \item No aeropêndulo manipula-se a velocidade de rotação do motor da hélice para manter determinado ângulo de referência entre a haste e a base \cite{morais2023implementaccao};
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth/2]{figuras/controle_tanques.png}
-    \caption[Controle de tanques acoplados]{Controle de tanques acoplados \cite{pimentel2024desenvolvimento}.}
-    \label{fan_plate}
-\end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth/3]{figuras/aeropendulo_cleiton.png}
+        \caption[Aeropêndulo]{Aeropêndulo \cite{morais2023implementaccao}.}
+        \label{aeropendulo_cleiton}
+    \end{figure}
+
+    \item No controle de nível de tanques acoplados feito em \cite{pimentel2024desenvolvimento}, a ação de controle é aplicada na bomba para buscar equilibrar o nível da água dentro do tanque, medido com um sensor ultrassônico, com o valor de referência.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth/3]{figuras/controle_tanques.png}
+        \caption[Controle de nível de tanques acoplados]{Controle de tanques acoplados \cite{pimentel2024desenvolvimento}.}
+        \label{fan_plate}
+    \end{figure}
+
+\end{itemize}
 
 Neste contexto, este trabalho consiste no projeto e construção de uma bancada experimental de um posicionador linear. Basicamente, o sistema é composto por um carro que deve ser posicionado ao longo de um guia linear. A tarefa de controle consiste em fazer com o que o carro vá para a posição de referência. Para isso, controla-se a tensão aplicada a um motor CC e mede-se a posição do carro em relação à posição inicial. A ideia é que esse equipamento possa ser utilizado nas aulas práticas das disciplinas de Controle na Universidade Federal de Uberlândia. O posicionador linear foi escolhido em virtude de possuir diversos parâmetros comuns e problemas tradicionais de controle \cite{netto2016relatorio}, sendo um modelo adequado para fins didáticos visto que não possui um nível elevado de complexidade. Além disso, a partir do modelo matemático identificado por meio da resposta ao degrau, desenvolve-se um sistema de controle por realimentação de estados \cite{ogata2010engenharia}, evidenciando a aplicabilidade de técnicas clássicas de controle ao sistema em estudo. 
 
