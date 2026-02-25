@@ -1,1 +1,11 @@
 \chapter{Conclusões e sugestões de trabalhos futuros}
+
+Em meio as constantes demandas do mercado por profissionais capacitados em técnicas de contole, tornou-se necessário introduzir a prática de controle aos estudantes de engenharia mecatrônica. Com essa linha de raciocínio, o objetivo deste trabalho era desenvolver uma bancada didática de um posicionador linear e implementar um sistema de controle de posição.
+
+Para a realização desse objetivo, utilizou-se de um Arduino Mega para embarcar o controlador, tornando possível variar a tensão média aplicada ao motor CC via uma ponte H. Além disso, um modelo matemático no Espaço de Estados foi desenvolvido e validado, sendo realizados ensaios de resposta a um degrau de tensão e ensaios de torque do motor para obtenção dos coeficientes do modelo. Com a bancada construída e o modelo matemático validado, foi elaborado um controlador por Realimentação de Estados para realizar a ação de controle e escolhida uma referência de posição do tipo degrau, sendo colocado a teste via experimentos com a bancada e via simulação computacional.
+
+Resultados de simulação demonstraram que o controlador era capaz de guiar o carro para a referência, embora não tenha antinjido os requisitos de projeto em virtude dos efeitos não lineares na simulação. Já os resultados experimentais demonstraram uma resposta do sistema mais lenta e mais próxima a um sistema de primeira ordem, mesmo assim, o controlador foi capaz de guiar o carro para a referência desejada e cumprir seu objetivo principal.
+
+Por meio dos resultados, pôde-se constatar que as discrepâncias com os requisitos de projeto estipulados podem ser atribuídas a efeitos não lineares presentes no equipamento real, como a zona morta e o atrito seco, além é claro de incertezas dos parâmetros do modelo e comportamento não linear de algumas grandezas. 
+
+Por fim, considerando as limitações do controlador escolhido e as dificuldades enfrentadas, possíveis trabalhos futuros podem se utilizar de técnicas mais avançadas de controle que levem em consideração as limitações físicas do equipamento real, como o Controle Preditivo Baseado em Modelo.
