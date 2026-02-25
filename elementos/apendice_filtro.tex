@@ -10,7 +10,7 @@ Para o projeto do filtro, foi considerada uma frequência de corte de 15 Hz e um
 Por meio da transformada Z inversa, torna-se possível obter a equação para implementação no microcontrolador, sendo $y$ o sinal e $y_f$ o sinal filtrado para um instante de tempo discreto.
 
 \begin{equation}
-    y[k]= 0,7478y_f[k-1] -0,2722y_f[k-2] +0,1311y[k] +0,2622y[k-1]+0.1311y[k-2]
+    y_f[k]= 0,7478y_f[k-1] -0,2722y_f[k-2] +0,1311y[k] +0,2622y[k-1]+0.1311y[k-2]
     \label{filtro}
 \end{equation}
 
