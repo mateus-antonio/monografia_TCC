@@ -1,6 +1,6 @@
 \chapter{Descrição do sistema}
 
-O objetivo do presente trabalho é desenvolver um sistema capaz de posicionar um carro ao longo de uma guia linear. Esse sistema será doravante denominado posicionador linear. Sistemas similares são encontrados em diferentes aplicações reais, por exemplo, em impressoras a jato, o bico de deposição de tinta deve ser posicionado ao longo da trilha de impressão. A seguir, detalham-se as características do sistema construído, bem como os ensaios para a realização da modelagem do processo.
+O sistema capaz de posicionar um carro ao longo de uma guia linear será doravante denominado posicionador linear. Sistemas similares são encontrados em diferentes aplicações reais, por exemplo, em impressoras a jato, o bico de deposição de tinta deve ser posicionado ao longo da trilha de impressão. A seguir, detalham-se as características do sistema construído, bem como os ensaios para a realização da modelagem do processo.
 
 O posicionador linear é constituído por um carro que desliza sobre trilhos, permitindo apenas movimento em um grau de liberdade. O veículo é conectado a um motor CC (Corrente Contínua) por meio de uma correia. Dessa forma, converte-se a rotação do motor em movimento linear do carro. O protótipo completo é apresentado nas Figuras \ref{fig:vista_superior} e \ref{fig:vista_frontal}.
 
@@ -76,7 +76,7 @@ Com o intuito de evitar danos à estrutura do posicionador, foram anexados dois 
 \end{figure}
 
 \section{Microcontrolador}
-Para embarcar o controlador do sistema, foi utilizado o microcontrolador Arduino Mega 2560 apresentado na Figura \ref{fig:conexoes}. O Arduino Mega possui 54 pinos digitais e 16 analógicos \cite{Arduino}. Esse controlador é baseado no ATmega2560, com 8 bits de arquitetura RISC avançada \cite{ATmega2560}. Detalhes sobre a memória desse microcontrolador encontram-se na Tabela \ref{tab:especificacoes}.
+Para embarcar o controlador do sistema, foi utilizado o microcontrolador Arduino Mega 2560 apresentado na Figura \ref{fig:conexoes}. O Arduino Mega possui 54 pinos digitais e 16 analógicos \cite{Arduino}. Esse controlador é baseado no ATmega2560, com 8 bits de arquitetura RISC \cite{ATmega2560}. Detalhes sobre a memória desse microcontrolador encontram-se na Tabela \ref{tab:especificacoes}.
 
  \begin{figure}[H]
     \centering
@@ -89,7 +89,7 @@ Para embarcar o controlador do sistema, foi utilizado o microcontrolador Arduino
     \centering
     \caption[Especificações técnicas Arduino Mega 2560]{Arduino Mega 2560 \cite{ATmega2560}.}
     \begin{tabular}{c|c}
-    \textbf{Arquitetura} & \textbf{AVR RISK avançada} \\
+    \textbf{Arquitetura} & \textbf{AVR RISK} \\
     \hline
     Memória FLASH & 256 Kb \\
     Memória EEPROM & 4 Kb \\
@@ -98,7 +98,7 @@ Para embarcar o controlador do sistema, foi utilizado o microcontrolador Arduino
     \label{tab:especificacoes}
 \end{table}
 
-O Arduino Mega será utilizado para medir a posição do carro (utilizando o \textit{encoder}), controlar a velocidade e o sentido de giro do motor CC (utilizando a Ponte H) e receber os dados dos dois sensores de fim de curso.
+O Arduino Mega será utilizado para calcular a posição do carro (utilizando o \textit{encoder}), controlar a velocidade e o sentido de giro do motor CC (utilizando a Ponte H) e receber os dados dos dois sensores de fim de curso.
 
 O microcontrolador irá processar os dados e, com base na diferença entre as posições atual e desejada para o carro, calcular a ação de controle, no caso, a tensão média aplicada ao motor. Nota-se, portanto, que o sistema irá operar em malha fechada \cite{ogata2010engenharia}. Para projetar a lei de controle, realizou-se a modelagem matemática do sistema, como será descrito a seguir.
 
@@ -293,7 +293,7 @@ Pode-se constatar que os parâmetros do sistema mudam conforme a amplitude do de
 Observando \eqref{velocidade_parametros}, nota-se que, apenas com os valores de $\tau$ e $k_0$, não é possível calcular os parâmetros do modelo ($M$, $M_c$ e $K_a$). Isso ocorre pois têm-se duas equações e três variáveis. Para resolver o problema foi realizado um ensaio adicional apenas para identificação de $K_a$.
 
 \subsection{Identificação do ganho de atuação}
-Com esse intuito, foi feita uma nova montagem, o motor foi retirado da correia e foi fixada uma haste de 0,5 m de comprimento e massa desprezível em seu eixo. Na extremidade livre dessa haste foi acoplada uma massa de 0,3 kg. Com a haste inicialmente em repouso na posição inferior, ao se aplicar um nível de tensão, o motor exercerá um torque $T$ em um sentido, enquanto que o peso $P$ da massa exercerá um momento no sentido contrário, a medida que o ângulo com o eixo vertical $\theta$ aumenta, o momento realizado pelo peso também irá aumentar, até chegar um ponto em que o sistema estabilize. Isto é que $T = P$. Para ilustrar a ideia, a Figura \ref{fig:diagrama_torque} representa o diagrama de forças do ensaio.
+Com esse intuito, foi feita uma nova montagem, o motor foi retirado da correia e foi fixada uma haste de 0,5 m de comprimento e massa desprezível em seu eixo. Na extremidade livre dessa haste foi acoplada uma massa de 0,3 kg. Com a haste inicialmente em repouso na posição inferior, ao se aplicar um nível de tensão, o motor exercerá um torque $T$ em um sentido, enquanto que o peso $P$ da massa exercerá um momento no sentido contrário, a medida que o ângulo com o eixo vertical $\theta$ aumenta, o momento realizado pelo peso também irá aumentar, até chegar um ponto em que o sistema estabilize. Isto é que o torque seja igual ao momento causado pela força peso. Para ilustrar a ideia, a Figura \ref{fig:diagrama_torque} representa o diagrama de forças do ensaio.
 
 \begin{figure}[H]
     \centering
@@ -358,7 +358,7 @@ Conhecendo-se $K_a$ e os dados da Tabela \ref{tab:parametros_identificados}, pod
     \centering
     \caption[Valores de $B_c$ e $M$ para as diferentes amplitudes de degrau]{Valores de $B_c$ e $M$ para as diferentes amplitudes de degrau.}
     \begin{tabular}{c|c|c|c|c}
-    \textbf{Tensão (V)} & \bm{$\tau$} \textbf{(s)} & \bm{$k_0 \mathrm{(\frac{rad}{Vms}})$} & \bm{$B_c \mathrm{(\frac{Ns}{m^2})}$} & \textbf{M (kg)}\\[3pt]  \hline
+    \textbf{Tensão (V)}  & \bm{$k_0 \mathrm{(\frac{rad}{Vms}})$} & \bm{$\tau$} \textbf{(s)} & \bm{$B_c \mathrm{(\frac{Ns}{m^2})}$} & \textbf{M (kg)}\\[3pt]  \hline
     3 & 0,15 & 5,93 & 60,78 & 10,25 \\ 
     6 & 0,29 & 10,69 & 31,82 & 2,98 \\ 
     9 & 0,34 & 15,89 & 27,32 & 1,72 \\ 
